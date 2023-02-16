@@ -84,6 +84,7 @@ namespace TallerMVC.Controllers
                 //validar si la contrasenia es la misma
                 if (admin.contrasenia == contraseniaCorta)
                 {
+                    Response.Cookies.Append("AdminId", admin.id.ToString());
                     return RedirectToAction("Index", "CitasAdmin");
                 }
             }
