@@ -13,12 +13,10 @@ namespace TallerMVC.Controllers
     {
         UsuarioDatos _usuariodatos = new UsuarioDatos();
         private readonly AesEncryption _aesEncryption;
-
         public UsuariosController(AesEncryption aesEncryption)
         {
             _aesEncryption = aesEncryption;
         }
-
         public IActionResult Index()
         {
             return View();
