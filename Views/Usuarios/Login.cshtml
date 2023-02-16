@@ -1,0 +1,28 @@
+﻿@model TallerMVC.Models.DTO.UsuariosLoginDTO
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <form asp-controller="Usuarios" asp-action="Login" method="post">
+            <div class="mb-3">
+                <label for="Email1" class="form-label">Email</label>
+                <input asp-for="email" type="email" class="form-control" id="Email1" aria-describedby="emailHelp" required>
+                <div id="emailHelp" class="form-text">No debes compartir tus credenciales con nadie.</div>
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Contrasenia</label>
+                <input asp-for="contrasenia" type="password" class="form-control" id="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </form>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </div>
+    }
+</div>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style type="text/css">
+  .boton_personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+  }
+</style>
+
+<div class="text-center mb-3">
+    <h1 class="display-4">Bienvenidos al Taller Automotriz</h1>
+    <img src="https://th.bing.com/th/id/OIP.Z3QB8py2LW0w-_PBJeErGgHaEU?pid=ImgDet&rs=1" class="img-fluid" alt="Responsive image">
+</div>
+<div class="mb-3 flex-column-4 text-center">
+    <a class="boton_personalizado" asp-controller="Usuarios" asp-action="Login">Inicia sesion aqui!!!</a>
+    <a class="boton_personalizado" asp-controller="Usuarios" asp-action="Register">Registrate aqui!!!</a>
+</div>

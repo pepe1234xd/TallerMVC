@@ -1,0 +1,50 @@
+﻿@model TallerMVC.Models.DTO.AdminRegisterDTO
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <form asp-action="Register" asp-controller="Admin" method="post">
+            <div class="mb-3">
+                <label for="Nombres" class="form-label">Nombres</label>
+                <input asp-for="nombres" type="text" class="form-control" id="Nombres" required>
+            </div>
+            <div class="mb-3">
+                <label for="Apellidos" class="form-label">Apellidos</label>
+                <input asp-for="apellidos" type="text" class="form-control" id="Apellidos" required>
+            </div>
+            <div class="mb-3">
+                <label for="Email1" class="form-label">Email</label>
+                <input asp-for="email" type="email" class="form-control" id="Email1" aria-describedby="emailHelp" required>
+            </div>
+             <div class="mb-3">
+                <label for="puesto" class="form-label">Puesto de trabajo</label>
+                    <select asp-for="puesto" class="form-select" id="puesto" required>
+                        <option value="">Selecciona un puesto de trabajo</option>
+                        <option value="Gerente">Gerente</option>
+                        <option value="Mecanico">Analista</option>
+                        <option value="Administrador">Desarrollador</option>
+                    </select>
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Contrasenia</label>
+                <input asp-for="contrasenia" type="password" class="form-control" id="Password" required maxlength="15">
+            </div>
+            <div class="mb-3">
+                <label for="Confirmarcontrasenia" class="form-label">Confirmar Contrasenia</label>
+                <input asp-for="confirmarContrasenia" type="password" class="form-control" id="Confirmarcontrasenia" required maxlength="15">
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarme</button>
+        </form>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+            <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+            </div>
+    }
+</div>
+
+

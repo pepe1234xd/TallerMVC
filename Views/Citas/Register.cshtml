@@ -1,0 +1,42 @@
+﻿@model CitasDetalles
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Register</h1>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <form asp-action="Register" asp-controller="Citas" method="post">
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input asp-for="fecha" type="date" class="form-control" id="fecha" required>
+            </div>
+            <div class="mb-3">
+                <label for="Marca" class="form-label">Marca</label>
+                <select asp-for="hora" class="form-select" id="puesto" required>
+                        <option value="">Selecciona un horario de trabajo</option>
+                        <option value="8:00">8:00am a 10:00am</option>
+                        <option value="10:00">10:00am a 12:00pm</option>
+                        <option value="12:00">12:00pm a 02:00pm</option>
+                        <option value="02:00">02:00pm a 04:00pm</option>
+                        <option value="04:00">04:00pm a 06:00pm</option>
+                        <option value="06:00">06:00pm a 08:00pm</option>
+                    </select>
+            </div>   
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion del problema</label>
+                <input asp-for="descripcion" type="text" class="form-control" id="descripcion" maxlength="500" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrarme</button>
+        </form>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+            <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+            </div>
+    }
+</div>

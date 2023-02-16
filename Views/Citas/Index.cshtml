@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TallerMVC.Models.DTO.CitasView>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Tus citas: </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="vehiculos" asp-action="Index" class="btn btn-primary">
+                <i class="bg bi-plus-circle"></i>&nbsp; Agregar nueva cita
+            </a>
+        </div>
+    </div>
+</div>
+<br>
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Fecha
+            </th>
+            <th>
+               Hora
+            </th>
+            <th>
+                Estatus
+            </th>
+            <th>
+                Descripcion 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ob in Model)
+        {
+            <tr>
+                <td width="20%">
+                    @ob.fecha
+                </td>
+                <td width="20%">
+                    @ob.hora
+                </td>
+                <td width="20%">
+                    @ob.status
+                </td>
+                <td width="20%">
+                    @ob.statusDescripcion
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a class="btn btn-primary mx-2" asp-controller="Citas" asp-action="Editar">
+                            <i class="bi bi-pencil-square"></i>Edit
+                        </a>
+                        <a class="btn btn-danger mx-2" asp-controller="Citas" asp-action="Borrar">
+                            <i class="bi bi-trash-fill"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
