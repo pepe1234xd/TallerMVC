@@ -15,7 +15,7 @@ namespace TallerMVC.Data
             using (var conexion = new SqlConnection(cn.cadenaConexion()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("sp_citas_sin_asignar", conexion);
+                SqlCommand cmd = new SqlCommand("sp_obtenerCitasAdmin", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 using (var dr = cmd.ExecuteReader())
@@ -24,6 +24,7 @@ namespace TallerMVC.Data
                     {
                         oLista.Add(new CitasView()
                         {
+                            id = dr.GetInt32("id"),
                             fecha = dr["fecha"].ToString(),
                             hora = dr["horario"].ToString(),
                             status = dr["estado"].ToString(),
@@ -35,15 +36,15 @@ namespace TallerMVC.Data
             return oLista;
         }
 
-        public Citas obtenerCita(int id)
+        public CitasView obtenerCita(int id)
         {
-            var oCitas = new Citas();
+            var oCitas = new CitasView();
 
             var cn = new Conexion();
             using (var conexion = new SqlConnection(cn.cadenaConexion()))
             {
                 conexion.Open();
-                SqlCommand cmd = new SqlCommand("spBuscarCitaPorId", conexion);
+                SqlCommand cmd = new SqlCommand("spObtenerCitaAdminId", conexion);
                 cmd.Parameters.AddWithValue("id", id);
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -51,9 +52,11 @@ namespace TallerMVC.Data
                 {
                     while (dr.Read())
                     {
-                        oCitas.id = Convert.ToInt32(dr["id"]);
-                        oCitas.usuario_id = Convert.ToInt32(dr["usuario_id"]);
-                        oCitas.vehiculo_id = Convert.ToInt32(dr["vehiculo_id"]);
+                        oCitas.id = dr.GetInt32("id");
+                        oCitas.fecha = dr["fecha"].ToString();
+                        oCitas.hora = dr["horario"].ToString();
+                        oCitas.status = dr["estado"].ToString();
+                        oCitas.statusDescripcion = dr["descripcion"].ToString();
                     }
                 }
             }
@@ -90,7 +93,7 @@ namespace TallerMVC.Data
             return rpta;
         }
 
-        public bool Editar(Usuarios ousuario)
+        public bool Editar(CitasView citasView)
         {
             bool rpta;
             try
@@ -99,12 +102,10 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
-                    cmd.Parameters.AddWithValue("id", ousuario.id);
-                    cmd.Parameters.AddWithValue("nombres", ousuario.nombres);
-                    cmd.Parameters.AddWithValue("apellidos", ousuario.apellidos);
-                    cmd.Parameters.AddWithValue("email", ousuario.email);
-                    cmd.Parameters.AddWithValue("contrasenia", ousuario.contrasenia);
+                    SqlCommand cmd = new SqlCommand("spEditarEstado", conexion);
+                    cmd.Parameters.AddWithValue("id", citasView.id);
+                    cmd.Parameters.AddWithValue("estado", citasView.status);
+                    cmd.Parameters.AddWithValue("descripcion", citasView.statusDescripcion);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();
@@ -120,7 +121,7 @@ namespace TallerMVC.Data
             return rpta;
         }
 
-        public bool Eliminar(int idUsuario)
+        public bool Eliminar(int id)
         {
             bool rpta;
             try
@@ -129,8 +130,8 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
-                    cmd.Parameters.AddWithValue("id", idUsuario);
+                    SqlCommand cmd = new SqlCommand("spEliminarCitas", conexion);
+                    cmd.Parameters.AddWithValue("id", id);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();

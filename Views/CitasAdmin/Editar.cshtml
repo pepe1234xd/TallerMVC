@@ -1,0 +1,33 @@
+﻿@model TallerMVC.Models.DTO.CitasView
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <form asp-action="Editar" asp-controller="CitasAdmin" method="post">
+
+            <div class="mb-3">
+                <label for="status" class="form-label">Estado: </label>
+                <select asp-for="status" class="form-select" id="status" required>
+                        <option value="">Selecciona un puesto de trabajo</option>
+                        <option value="Aceptado">Aceptado</option>
+                        <option value="Rechazado">Rechazado</option>
+                    </select>
+            </div>
+             <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input asp-for="statusDescripcion" type="text" class="form-control" id="descripcion" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Editar</button>
+            <a asp-action="Index" asp-controller="Citas" class="btn btn-primary">Regresar</a>
+        </form>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+            <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+            </div>
+    }
+</div>
