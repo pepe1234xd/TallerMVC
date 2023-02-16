@@ -36,7 +36,6 @@ namespace TallerMVC.Data
             }
             return oLista;
         }
-
         public vehiculos obtenerVehiculo(int id)
         { 
             var oVehiculo = new vehiculos();
@@ -68,7 +67,6 @@ namespace TallerMVC.Data
             }
             return oVehiculo;
         }
-
         public bool Guardar(vehiculos ovehiculos)
         {
             bool rpta;
@@ -97,8 +95,7 @@ namespace TallerMVC.Data
 
             return rpta;
         }
-
-        public bool Editar(Usuarios ousuario)
+        public bool Editar(vehiculos ovehiculos)
         {
             bool rpta;
             try
@@ -107,12 +104,11 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
-                    cmd.Parameters.AddWithValue("id", ousuario.id);
-                    cmd.Parameters.AddWithValue("nombres", ousuario.nombres);
-                    cmd.Parameters.AddWithValue("apellidos", ousuario.apellidos);
-                    cmd.Parameters.AddWithValue("email", ousuario.email);
-                    cmd.Parameters.AddWithValue("contrasenia", ousuario.contrasenia);
+                    SqlCommand cmd = new SqlCommand("spEditarVehiculo", conexion);
+                    cmd.Parameters.AddWithValue("id", ovehiculos.id);
+                    cmd.Parameters.AddWithValue("marca", ovehiculos.marca);
+                    cmd.Parameters.AddWithValue("modelo", ovehiculos.modelo);
+                    cmd.Parameters.AddWithValue("placas", ovehiculos.placas);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();
@@ -127,7 +123,6 @@ namespace TallerMVC.Data
 
             return rpta;
         }
-
         public bool Eliminar(int idUsuario)
         {
             bool rpta;
@@ -137,7 +132,7 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
+                    SqlCommand cmd = new SqlCommand("spEliminarVehiculo", conexion);
                     cmd.Parameters.AddWithValue("id", idUsuario);
                     cmd.CommandType = CommandType.StoredProcedure;
 

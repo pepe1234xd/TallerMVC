@@ -27,7 +27,24 @@ namespace TallerMVC.Controllers
         {
             return View();
         }
-
+        public IActionResult LogOut()
+        {
+            Response.Cookies.Delete("UserId");
+            Response.Cookies.Delete("AdminPuesto");
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Editar(int id)
+        {
+            id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
+            var admin = _admindatos.obtenerAdminId(id);
+            return View(admin);
+        }
+        public IActionResult Eliminar(int id)
+        {
+            id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
+            var admin = _admindatos.obtenerAdminId(id);
+            return View(admin);
+        }
         [HttpPost]
         public IActionResult Register(AdminRegisterDTO oAdmin)
         {
@@ -70,7 +87,6 @@ namespace TallerMVC.Controllers
             ViewBag.Error = "No se pudo registrar al usuario.";
             return View();
         }
-
         [HttpPost]
         public IActionResult Login(string email, string contrasenia)
         {
@@ -85,11 +101,51 @@ namespace TallerMVC.Controllers
                 if (admin.contrasenia == contraseniaCorta)
                 {
                     Response.Cookies.Append("AdminId", admin.id.ToString());
+                    Response.Cookies.Append("AdminPuesto", admin.puesto);
                     return RedirectToAction("Index", "CitasAdmin");
                 }
             }
             // Si el usuario no está registrado o las contraseñas no coinciden, mostrar un mensaje de error.
             ViewBag.Error = "Correo electrónico o contraseña inválidos.";
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Editar(Admins admins)
+        {
+            //encriptacion de contrasenia
+            admins.contrasenia = _aesEncryption.Encrypt(admins.contrasenia);
+
+            //agregando el id para editar en la base de datos
+            admins.id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
+
+            // Editar al admin
+            var respuesta = _admindatos.Editar(admins);
+
+            if (respuesta)
+            {
+                return RedirectToAction("Index", "CitasAdmin");
+            }
+
+            ViewBag.Error = "No se pudo editar al administrador.";
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Eliminar(Admins admins)
+        {
+            //agregando el id para eliminar en la base de datos
+            var id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
+
+            // Eliminar al admin
+            var respuesta = _admindatos.Eliminar(id);
+
+            if (respuesta)
+            {
+                Response.Cookies.Delete("AdminId");
+                Response.Cookies.Delete("PuestoId");
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Error = "No se pudo eliminar al usuario.";
             return View();
         }
     }

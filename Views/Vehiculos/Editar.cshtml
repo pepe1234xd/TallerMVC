@@ -1,0 +1,34 @@
+﻿@model vehiculos
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <form asp-action="Editar" asp-controller="vehiculos" method="post">
+            <div class="mb-3">
+                <label for="Marca" class="form-label">Marca</label>
+                <input asp-for="marca" type="text" class="form-control" id="Marca" required>
+            </div>
+            <div class="mb-3">
+                <label for="Modelo" class="form-label">Modelo</label>
+                <input asp-for="modelo" type="text" class="form-control" id="Modelo" required>
+            </div>
+            <div class="mb-3">
+                <label for="placas" class="form-label">Placas</label>
+                <input asp-for="placas" type="text" class="form-control" id="placas" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Editar</button>
+            <a asp-action="Index" asp-controller="vehiculos" class="btn btn-primary">Regresar</a>
+        </form>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Error))
+    {
+            <div class="alert alert-danger" role="alert">
+            @ViewBag.Error
+            </div>
+    }
+</div>
+

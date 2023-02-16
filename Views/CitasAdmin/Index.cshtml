@@ -5,6 +5,24 @@
 }
 <div class="container p-3">
     <div class="row pt-4">
+        <h2 class="text-primary">Perfil </h2>
+        <div class="col-6">
+           
+            <a asp-controller="Admin" asp-action="Logout" class="btn btn-primary">
+                cerrar sesion
+            </a>      
+        </div>
+        <div class="col-6 text-end">
+                <a asp-controller="Admin" asp-action="Editar" class="btn btn-danger text-end">
+                Editar mi cuenta
+                </a>
+                <a asp-controller="Admin" asp-action="Eliminar" class="btn btn-warning text-end">
+                Eliminar mi cuenta
+                </a>
+            </div>
+    </div>
+
+    <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-primary">Citas pendientes: </h2>
         </div>

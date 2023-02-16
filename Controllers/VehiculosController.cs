@@ -15,10 +15,24 @@ namespace TallerMVC.Controllers
             var oLista = vehiculosDatos.Listar(id);
             return View(oLista);
         }
-
         public IActionResult Register()
         {
             return View();
+        }
+        public IActionResult Editar(int id)
+        {
+            var vehiculo = vehiculosDatos.obtenerVehiculo(id);
+            return View(vehiculo);
+        }
+        public IActionResult Eliminar(int id)
+        {
+            var vehiculo = vehiculosDatos.obtenerVehiculo(id);
+            return View(vehiculo);
+        }
+        public IActionResult Seleccionar(int id)
+        {
+            Response.Cookies.Append("VehiculoId", id.ToString());
+            return RedirectToAction("Register", "Citas");
         }
 
         [HttpPost]
@@ -35,11 +49,31 @@ namespace TallerMVC.Controllers
             ViewBag.Error = "No se pudo registrar el auto.";
             return View();
         }
-
-        public IActionResult Seleccionar(int id)
+        [HttpPost]
+        public IActionResult Editar(vehiculos ovehiculos)
         {
-            Response.Cookies.Append("VehiculoId", id.ToString());
-            return RedirectToAction("Register","Citas");
+            var respuesta = vehiculosDatos.Editar(ovehiculos);
+
+            if (respuesta)
+            {
+                return RedirectToAction("index");
+            }
+
+            ViewBag.Error = "No se pudo registrar el auto.";
+            return View();
         }
+        [HttpPost]
+        public IActionResult Eliminar(vehiculos ovehiculos)
+        {
+            var respuesta = vehiculosDatos.Eliminar(ovehiculos.id);
+            if (respuesta)
+            {
+                return RedirectToAction("index", "vehiculos");
+            }
+
+            ViewBag.Error = "No se pudo registrar el auto.";
+            return View();
+        }
+
     }
 }

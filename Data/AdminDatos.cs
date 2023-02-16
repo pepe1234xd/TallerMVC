@@ -68,7 +68,38 @@ namespace TallerMVC.Data
             }
             return oAdmin;
         }
+        public Admins obtenerAdminId(int id)
+        {
+            var oAdmin = new Admins();
 
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.cadenaConexion()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("spBuscarAdminPorId", conexion);
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        oAdmin.id = Convert.ToInt32(dr["id"]);
+                        oAdmin.nombres = dr["nombres"].ToString();
+                        oAdmin.apellidos = dr["apellidos"].ToString();
+                        oAdmin.email = dr["email"].ToString();
+                        oAdmin.contrasenia = dr["contrasenia"].ToString();
+                        oAdmin.puesto = dr["puesto"].ToString();
+                    }
+                }
+            }
+
+            if (oAdmin.email == null)
+            {
+                return null;
+            }
+            return oAdmin;
+        }
         public bool Guardar(Admins oAdmin)
         {
             bool rpta;
@@ -98,7 +129,6 @@ namespace TallerMVC.Data
 
             return rpta;
         }
-
         public bool Editar(Admins oAdmin)
         {
             bool rpta;
@@ -108,7 +138,7 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
+                    SqlCommand cmd = new SqlCommand("spEditarAdmin", conexion);
                     cmd.Parameters.AddWithValue("id", oAdmin.id);
                     cmd.Parameters.AddWithValue("nombres", oAdmin.nombres);
                     cmd.Parameters.AddWithValue("apellidos", oAdmin.apellidos);
@@ -129,8 +159,7 @@ namespace TallerMVC.Data
 
             return rpta;
         }
-
-        public bool Eliminar(string email)
+        public bool Eliminar(int id)
         {
             bool rpta;
             try
@@ -139,8 +168,8 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
-                    cmd.Parameters.AddWithValue("email", email);
+                    SqlCommand cmd = new SqlCommand("spEliminarAdmin", conexion);
+                    cmd.Parameters.AddWithValue("id", id);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.ExecuteNonQuery();

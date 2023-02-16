@@ -36,7 +36,32 @@ namespace TallerMVC.Data
             }
             return oLista;
         }
+        public Usuarios obtenerUsuarioId(int id)
+        {
+            var oUsuario = new Usuarios();
 
+            var cn = new Conexion();
+            using (var conexion = new SqlConnection(cn.cadenaConexion()))
+            {
+                conexion.Open();
+                SqlCommand cmd = new SqlCommand("spBuscarUsuarioPorId", conexion);
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        oUsuario.id = Convert.ToInt32(dr["id"]);
+                        oUsuario.nombres = dr["nombres"].ToString();
+                        oUsuario.apellidos = dr["apellidos"].ToString();
+                        oUsuario.email = dr["email"].ToString();
+                        oUsuario.contrasenia = dr["contrasenia"].ToString();
+                    }
+                }
+            }
+            return oUsuario;
+        }
         public Usuarios obtenerUsuario(string email)
         {
             var oUsuario = new Usuarios();
@@ -69,7 +94,6 @@ namespace TallerMVC.Data
             }
             return oUsuario;
         }
-
         public bool Guardar(Usuarios ousuario)
         {
             bool rpta;
@@ -98,7 +122,6 @@ namespace TallerMVC.Data
 
             return rpta;
         }
-
         public bool Editar(Usuarios ousuario)
         {
             bool rpta;
@@ -108,7 +131,7 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
+                    SqlCommand cmd = new SqlCommand("spEditarUsuario", conexion);
                     cmd.Parameters.AddWithValue("id", ousuario.id);
                     cmd.Parameters.AddWithValue("nombres", ousuario.nombres);
                     cmd.Parameters.AddWithValue("apellidos", ousuario.apellidos);
@@ -128,7 +151,6 @@ namespace TallerMVC.Data
 
             return rpta;
         }
-
         public bool Eliminar(int idUsuario)
         {
             bool rpta;
@@ -138,7 +160,7 @@ namespace TallerMVC.Data
                 using (var conexion = new SqlConnection(cn.cadenaConexion()))
                 {
                     conexion.Open();
-                    SqlCommand cmd = new SqlCommand("", conexion);
+                    SqlCommand cmd = new SqlCommand("spEliminarUsuario", conexion);
                     cmd.Parameters.AddWithValue("id", idUsuario);
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -151,7 +173,6 @@ namespace TallerMVC.Data
                 string err = ex.Message;
                 rpta = false;
             }
-
             return rpta;
         }
 

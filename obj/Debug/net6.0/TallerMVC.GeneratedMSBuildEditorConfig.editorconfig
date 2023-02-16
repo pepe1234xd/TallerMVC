@@ -16,6 +16,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Jose Alfredo\OneDrive\Escritorio\Alfredo\Source\repos\services\net\firtApi\TallerMVC\TallerMVC
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Admin/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Admin/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWxpbWluYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Admin/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +34,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/CitasAdmin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNBZG1pblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Citas/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Citas/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YXNcRWxpbWluYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Citas/Index.cshtml]
@@ -52,12 +68,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Usuarios/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Usuarios/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcRWxpbWluYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Usuarios/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Usuarios/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb3NcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Vehiculos/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Vehiculos/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXEVsaW1pbmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Jose Alfredo/OneDrive/Escritorio/Alfredo/Source/repos/services/net/firtApi/TallerMVC/TallerMVC/Views/Vehiculos/Index.cshtml]

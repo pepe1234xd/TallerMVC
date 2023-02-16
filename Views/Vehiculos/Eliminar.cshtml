@@ -1,0 +1,15 @@
+﻿@model vehiculos
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <form asp-action="Eliminar" asp-controller="vehiculos" method="post">
+            <h5>Estas seguro de que deseas eliminar este vehiculo?</h5>
+            <button type="submit" class="btn btn-warning">Eliminar</button>
+            <a asp-action="Index" asp-controller="Citas" class="btn btn-primary">Regresar</a>
+        </form>
+    </div>
+</div>
+

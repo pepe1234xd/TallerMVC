@@ -5,12 +5,30 @@
 }
 <div class="container p-3">
     <div class="row pt-4">
+        <h2 class="text-primary">Perfil </h2>
+        <div class="col-6">
+           
+            <a asp-controller="Usuarios" asp-action="Logout" class="btn btn-primary">
+                cerrar sesion
+            </a>      
+        </div>
+        <div class="col-6 text-end">
+                <a asp-controller="Usuarios" asp-action="Editar" class="btn btn-danger text-end">
+                Editar mi cuenta
+                </a>
+                <a asp-controller="Usuarios" asp-action="Eliminar" class="btn btn-warning text-end">
+                Eliminar mi cuenta
+                </a>
+            </div>
+    </div>
+
+    <div class="row pt-4">
         <div class="col-6">
             <h2 class="text-primary">Tus citas: </h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="vehiculos" asp-action="Index" class="btn btn-primary">
-                <i class="bg bi-plus-circle"></i>&nbsp; Agregar nueva cita
+                Agregar nueva cita
             </a>
         </div>
     </div>
@@ -51,10 +69,10 @@
                 </td>
                 <td>
                     <div class="w-75 btn-group" role="group">
-                        <a class="btn btn-primary mx-2" asp-controller="Citas" asp-action="Editar">
+                        <a class="btn btn-primary mx-2" asp-controller="Citas" asp-action="Editar" asp-route-id="@ob.id">
                             <i class="bi bi-pencil-square"></i>Edit
                         </a>
-                        <a class="btn btn-danger mx-2" asp-controller="Citas" asp-action="Borrar">
+                        <a class="btn btn-danger mx-2" asp-controller="Citas" asp-action="Eliminar" asp-route-id="@ob.id">
                             <i class="bi bi-trash-fill"></i>Delete
                         </a>
                     </div>

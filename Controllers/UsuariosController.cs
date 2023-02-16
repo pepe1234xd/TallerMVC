@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 using TallerMVC.Data;
 using TallerMVC.Models;
 using TallerMVC.Models.DTO;
@@ -29,7 +31,24 @@ namespace TallerMVC.Controllers
         {
             return View();
         }
-
+        public IActionResult LogOut()
+        {
+            Response.Cookies.Delete("UserId");
+            Response.Cookies.Delete("VehiculoId");
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Editar(int id)
+        {
+            id = int.Parse(HttpContext.Request.Cookies["UserId"]);
+            var usuario = _usuariodatos.obtenerUsuarioId(id);
+            return View(usuario);
+        }
+        public IActionResult Eliminar(int id)
+        {
+            id = int.Parse(HttpContext.Request.Cookies["UserId"]);
+            var usuario = _usuariodatos.obtenerUsuarioId(id);
+            return View(usuario);
+        }
         [HttpPost]
         public IActionResult Register(UsuariosRegisterDTO oUsuario)
         {
@@ -72,7 +91,6 @@ namespace TallerMVC.Controllers
             ViewBag.Error = "No se pudo registrar al usuario.";
             return View();
         }
-
         [HttpPost]
         public IActionResult Login(string email, string contrasenia)
         {
@@ -94,5 +112,45 @@ namespace TallerMVC.Controllers
             ViewBag.Error = "Correo electrónico o contraseña inválidos.";
             return View();
         }
+        [HttpPost]
+        public IActionResult Editar(Usuarios oUsuario)
+        {
+            //encriptacion de contrasenia
+            oUsuario.contrasenia = _aesEncryption.Encrypt(oUsuario.contrasenia);
+
+            //agregando el id para editar en la base de datos
+            oUsuario.id = int.Parse(HttpContext.Request.Cookies["UserId"]);
+
+            // Editar al usuario
+            var respuesta = _usuariodatos.Editar(oUsuario);
+
+            if (respuesta)
+            {
+                return RedirectToAction("Index", "Citas");
+            }
+
+            ViewBag.Error = "No se pudo editar al usuario.";
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Eliminar()
+        {
+            //agregando el id para eliminar en la base de datos
+            var id = int.Parse(HttpContext.Request.Cookies["UserId"]);
+
+            // Editar al usuario
+            var respuesta = _usuariodatos.Eliminar(id);
+
+            if (respuesta)
+            {
+                Response.Cookies.Delete("UserId");
+                Response.Cookies.Delete("VehiculoId");
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Error = "No se pudo eliminar al usuario.";
+            return View();
+        }
+
     }
 }
