@@ -35,12 +35,20 @@ namespace TallerMVC.Controllers
         }
         public IActionResult Editar(int id)
         {
+            if (HttpContext.Request.Cookies["AdminId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
             var admin = _admindatos.obtenerAdminId(id);
             return View(admin);
         }
         public IActionResult Eliminar(int id)
         {
+            if (HttpContext.Request.Cookies["AdminId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
             var admin = _admindatos.obtenerAdminId(id);
             return View(admin);
@@ -112,11 +120,15 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Editar(Admins admins)
         {
-            //encriptacion de contrasenia
-            admins.contrasenia = _aesEncryption.Encrypt(admins.contrasenia);
-
+            if (HttpContext.Request.Cookies["AdminId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             //agregando el id para editar en la base de datos
             admins.id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
+
+            //encriptacion de contrasenia
+            admins.contrasenia = _aesEncryption.Encrypt(admins.contrasenia);
 
             // Editar al admin
             var respuesta = _admindatos.Editar(admins);
@@ -132,6 +144,10 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Eliminar(Admins admins)
         {
+            if (HttpContext.Request.Cookies["AdminId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             //agregando el id para eliminar en la base de datos
             var id = int.Parse(HttpContext.Request.Cookies["AdminId"]);
 

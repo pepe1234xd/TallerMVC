@@ -21,16 +21,28 @@ namespace TallerMVC.Controllers
         }
         public IActionResult Editar(int id)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             var vehiculo = vehiculosDatos.obtenerVehiculo(id);
             return View(vehiculo);
         }
         public IActionResult Eliminar(int id)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             var vehiculo = vehiculosDatos.obtenerVehiculo(id);
             return View(vehiculo);
         }
         public IActionResult Seleccionar(int id)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             Response.Cookies.Append("VehiculoId", id.ToString());
             return RedirectToAction("Register", "Citas");
         }
@@ -38,6 +50,10 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Register(vehiculos ovehiculos)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             ovehiculos.usuario_id = int.Parse(HttpContext.Request.Cookies["UserId"]);
             var respuesta = vehiculosDatos.Guardar(ovehiculos);
 
@@ -52,6 +68,10 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Editar(vehiculos ovehiculos)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             var respuesta = vehiculosDatos.Editar(ovehiculos);
 
             if (respuesta)
@@ -65,6 +85,10 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Eliminar(vehiculos ovehiculos)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             var respuesta = vehiculosDatos.Eliminar(ovehiculos.id);
             if (respuesta)
             {

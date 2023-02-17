@@ -1,4 +1,5 @@
-﻿using TallerMVC.Data.Validaciones;
+﻿using System.ComponentModel.DataAnnotations;
+using TallerMVC.Data.Validaciones;
 
 namespace TallerMVC.Models
 {

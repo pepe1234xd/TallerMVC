@@ -31,18 +31,30 @@ namespace TallerMVC.Controllers
         }
         public IActionResult LogOut()
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             Response.Cookies.Delete("UserId");
             Response.Cookies.Delete("VehiculoId");
             return RedirectToAction("Index", "Home");
         }
         public IActionResult Editar(int id)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             id = int.Parse(HttpContext.Request.Cookies["UserId"]);
             var usuario = _usuariodatos.obtenerUsuarioId(id);
             return View(usuario);
         }
         public IActionResult Eliminar(int id)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             id = int.Parse(HttpContext.Request.Cookies["UserId"]);
             var usuario = _usuariodatos.obtenerUsuarioId(id);
             return View(usuario);
@@ -113,6 +125,10 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Editar(Usuarios oUsuario)
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             //encriptacion de contrasenia
             oUsuario.contrasenia = _aesEncryption.Encrypt(oUsuario.contrasenia);
 
@@ -133,6 +149,10 @@ namespace TallerMVC.Controllers
         [HttpPost]
         public IActionResult Eliminar()
         {
+            if (HttpContext.Request.Cookies["UserId"] == null)
+            {
+                return RedirectToAction("ErrorCustom", "Home");
+            }
             //agregando el id para eliminar en la base de datos
             var id = int.Parse(HttpContext.Request.Cookies["UserId"]);
 

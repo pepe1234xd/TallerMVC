@@ -25,7 +25,7 @@ namespace TallerMVC.Data
                         oLista.Add(new CitasView()
                         {
                             id = dr.GetInt32("id"),
-                            fecha = dr["fecha"].ToString(),
+                            fecha = (DateTime)dr["fecha"],
                             hora = dr["horario"].ToString(),
                             status = dr["estado"].ToString(),
                             statusDescripcion = dr["descripcion"].ToString()
@@ -53,7 +53,7 @@ namespace TallerMVC.Data
                     while (dr.Read())
                     {
                         oCitas.id = dr.GetInt32("id");
-                        oCitas.fecha = dr["fecha"].ToString();
+                        oCitas.fecha = (DateTime)dr["fecha"];
                         oCitas.hora = dr["horario"].ToString();
                         oCitas.status = dr["estado"].ToString();
                         oCitas.statusDescripcion = dr["descripcion"].ToString();

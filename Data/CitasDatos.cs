@@ -26,7 +26,7 @@ namespace TallerMVC.Data
                         oLista.Add(new CitasView()
                         {
                             id = dr.GetInt32("id"),
-                            fecha = dr["fecha"].ToString(),
+                            fecha = (DateTime)dr["fecha"],
                             hora = dr["horario"].ToString(),
                             status = dr["estado"].ToString(),
                             statusDescripcion = dr["descripcion"].ToString()
